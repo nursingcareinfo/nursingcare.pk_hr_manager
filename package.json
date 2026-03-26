@@ -9,13 +9,19 @@
     "preview": "vite preview",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit",
-    "start": "node server.ts"
+    "start": "node server.ts",
+    "mcp": "tsx mcp_server.ts",
+    "sync:supabase": "tsx scripts/sync-supabase.ts"
   },
   "dependencies": {
     "@google/genai": "^1.29.0",
+    "@modelcontextprotocol/sdk": "^1.28.0",
+    "@supabase/supabase-js": "^2.100.1",
     "@tailwindcss/vite": "^4.1.14",
     "@vitejs/plugin-react": "^5.0.4",
+    "axios": "^1.13.6",
     "clsx": "^2.1.1",
+    "cors": "^2.8.6",
     "date-fns": "^4.1.0",
     "dotenv": "^17.2.3",
     "express": "^4.21.2",

@@ -1,6 +1,6 @@
 import React from "react";
 import { auth, signInWithGoogle } from "../firebase";
-import { LogIn, ShieldCheck } from "lucide-react";
+import { LogIn } from "lucide-react";
 
 export default function Login() {
   const handleLogin = async () => {
@@ -14,12 +14,17 @@ export default function Login() {
   return (
     <div className="min-h-screen bg-neutral-50 flex items-center justify-center p-6">
       <div className="bg-white p-12 rounded-3xl border border-neutral-200 shadow-xl max-w-md w-full text-center">
-        <div className="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
-          <ShieldCheck size={32} className="text-indigo-600" />
+        <div className="w-24 h-24 rounded-3xl flex items-center justify-center mx-auto mb-8 overflow-hidden">
+          <img 
+            src="/nursingcarelogo.png" 
+            alt="NursingCare.pk Logo" 
+            className="w-full h-full object-contain"
+            referrerPolicy="no-referrer"
+          />
         </div>
-        <h1 className="text-3xl font-bold text-neutral-900 mb-2">Nexus HR</h1>
+        <h1 className="text-3xl font-bold text-neutral-900 mb-2">NursingCare.pk</h1>
         <p className="text-neutral-500 mb-8 leading-relaxed">
-          Secure HR Automation System. Please sign in to access the dashboard.
+          Home Nursing Service Management System. Please sign in to access the dashboard.
         </p>
         <button
           onClick={handleLogin}

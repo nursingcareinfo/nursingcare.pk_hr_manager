@@ -1,6 +1,6 @@
 {
-  "name": "Nexus HR Automation",
-  "description": "A comprehensive HR Automation System for recruiting, onboarding, employee management, offboarding, and compliance tracking.",
+  "name": "NursingCare.pk",
+  "description": "A comprehensive HR Management System for NursingCare.pk Home Nursing Service, managing staff registration, compliance, and patient assignments.",
   "requestFramePermissions": [
     "camera",
     "microphone",

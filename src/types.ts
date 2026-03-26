@@ -27,18 +27,54 @@ export interface Employee {
   gender?: string;
   cnic?: string;
   designation: string;
-  contact1: string;
-  district: string;
+  contact: string;
+  email?: string;
+  residentialAddress?: string;
+  permanentAddress?: string;
   religion?: string;
   maritalStatus?: string;
-  age?: string;
-  paymentMode?: string;
-  languages?: string;
+  languageSpoken?: string;
+  modeOfPayment?: {
+    type: "mobile" | "bank";
+    mobile?: {
+      provider: string;
+      number?: string;
+      accountNo?: string;
+      network?: string;
+      accountName: string;
+    };
+    bank?: {
+      accountName?: string;
+      accountTitle?: string;
+      bankName: string;
+      accountNumber?: string;
+      accountNo?: string;
+      branch?: string;
+    };
+  };
+  guarantor?: {
+    name: string;
+    relation: string;
+    contact: string;
+    cnic: string;
+  };
   status: "active" | "onboarding" | "offboarding" | "inactive";
-  email?: string;
   department?: string;
   joinDate?: string;
   managerId?: string;
+  certifications?: string[];
+  vaccinationStatus?: string;
+  skills?: string[];
+  emergencyContact?: string;
+  baseRate?: number; // Daily rate for 12h shift
+  // Legacy fields for compatibility
+  district?: string;
+  area?: string;
+  fullAddress?: string;
+  age?: string;
+  paymentMode?: string;
+  paymentDetails?: string;
+  languages?: string;
 }
 
 export interface Patient {
@@ -101,4 +137,15 @@ export interface ComplianceDoc {
   url: string;
   expiryDate?: string;
   status: "valid" | "expired" | "missing";
+}
+
+export interface PayrollRecord {
+  id: string;
+  employeeId: string;
+  month: string; // e.g., "2026-03"
+  shiftsCount: number;
+  baseRate: number;
+  totalAmount: number;
+  status: "pending" | "paid";
+  paidAt?: string;
 }

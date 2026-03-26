@@ -4,14 +4,28 @@ export const INITIAL_STAFF = [
     name: "Atif Ali",
     designation: "CEO & Managing Director",
     district: "Karachi (South)",
-    gender: "Male"
+    area: "Clifton",
+    fullAddress: "House 123, Street 5, Clifton Block 5, Karachi",
+    gender: "Male",
+    status: "active",
+    certifications: ["BLS", "ACLS"],
+    vaccinationStatus: "Fully Vaccinated",
+    skills: ["Management", "Strategic Planning"],
+    emergencyContact: "0300-1234567"
   },
   {
     id: "NC-KHI-002",
     name: "Theo",
     designation: "Office Coordinator & HR Manager",
     district: "Karachi (South)",
-    gender: "Male"
+    area: "DHA Phase 6",
+    fullAddress: "Apartment 4B, DHA Phase 6, Karachi",
+    gender: "Male",
+    status: "active",
+    certifications: ["HRM Certification"],
+    vaccinationStatus: "Fully Vaccinated",
+    skills: ["Recruitment", "Employee Relations"],
+    emergencyContact: "0300-7654321"
   },
   {
     id: "NC-KHI-003",
@@ -32,40 +46,71 @@ export const INITIAL_STAFF = [
     name: "Aaliya Siddiqui",
     designation: "Nurse Assistant",
     district: "Korangi",
-    contact: "0305-6657685"
+    area: "Landhi",
+    fullAddress: "Sector 36-B, Landhi, Karachi",
+    contact: "0305-6657685",
+    status: "active",
+    baseRate: 2800,
+    paymentMode: "Easypaisa",
+    paymentDetails: "0305-6657685"
   },
   {
     id: "NC-KHI-006",
     name: "Abbas Ghafoor",
     designation: "Nurse Assistant",
     district: "Gulshan",
-    contact: "0300-3542540"
+    area: "Gulshan Block 1",
+    fullAddress: "House 12, Gulshan Block 1, Karachi",
+    contact: "0300-3542540",
+    status: "active",
+    baseRate: 2500,
+    paymentMode: "Easypaisa",
+    paymentDetails: "0300-3542540"
   },
   {
     id: "NC-KHI-007",
     name: "Abdul Rafay",
     designation: "Attendant",
     district: "Gulshan",
+    area: "Gulshan Block 2",
+    fullAddress: "Apartment 5, Gulshan Block 2, Karachi",
     contact: "0300-2641179",
     cnic: "42201-9879582-5",
-    gender: "Male"
+    gender: "Male",
+    status: "active",
+    baseRate: 2500,
+    paymentMode: "Jazz Cash",
+    paymentDetails: "0300-2641179"
   },
   {
     id: "NC-KHI-008",
     name: "Abdul Rahim",
     designation: "Nurse Assistant",
     district: "Gulshan",
+    area: "Gulshan Block 3",
+    fullAddress: "House 8, Gulshan Block 3, Karachi",
     contact: "0340-7057378",
     cnic: "42201-1449881-5",
-    gender: "Male"
+    gender: "Male",
+    status: "active",
+    baseRate: 2500,
+    paymentMode: "Bank Transfer",
+    paymentDetails: "Meezan Bank - 0123456789"
   },
   {
     id: "NC-KHI-009",
     name: "Abdul Rehman",
     designation: "R/N",
+    district: "Gulshan",
+    area: "Gulshan-e-Iqbal",
+    fullAddress: "Block 13-D, Gulshan-e-Iqbal, Karachi",
     contact: "0304-2195110",
     cnic: "13202-1173220-3",
-    gender: "Male"
+    gender: "Male",
+    status: "active",
+    baseRate: 3500,
+    paymentMode: "Bank Transfer",
+    paymentDetails: "HBL - 1234567890123"
   },
   {
     id: "NC-KHI-010",

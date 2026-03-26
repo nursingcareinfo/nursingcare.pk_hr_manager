@@ -34,7 +34,7 @@ export default function Dashboard() {
               <div className={`p-2 rounded-xl ${stat.bg}`}>
                 <stat.icon size={24} className={stat.color} />
               </div>
-              <span className="text-xs font-medium text-neutral-400 uppercase tracking-wider">Nexus HR</span>
+              <span className="text-xs font-medium text-neutral-400 uppercase tracking-wider">Nursing Care HR</span>
             </div>
             <p className="text-sm font-medium text-neutral-500">{stat.name}</p>
             <p className="text-3xl font-bold text-neutral-900 mt-1">{stat.value}</p>

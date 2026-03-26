@@ -57,9 +57,19 @@ export default function Layout({ children }: LayoutProps) {
       >
         <div className="flex flex-col h-full">
           <div className="flex items-center justify-between h-16 px-6 border-b border-neutral-100">
-            <span className={cn("font-bold text-xl tracking-tight text-indigo-600 transition-opacity", !isSidebarOpen && "lg:opacity-0")}>
-              Nexus HR
-            </span>
+            <div className={cn("flex items-center space-x-2 transition-opacity", !isSidebarOpen && "lg:opacity-0")}>
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden">
+                <img 
+                  src="/nursingcarelogo.png" 
+                  alt="NursingCare.pk Logo" 
+                  className="w-full h-full object-contain"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+              <span className="font-bold text-xl tracking-tight text-neutral-900">
+                NursingCare.pk
+              </span>
+            </div>
             <button 
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
               className="p-1 rounded-md hover:bg-neutral-100 lg:hidden"
