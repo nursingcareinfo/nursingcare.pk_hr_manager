@@ -185,6 +185,8 @@ export default function EmployeeManagement() {
                   <th className="px-6 py-4 text-xs font-bold text-neutral-400 uppercase tracking-wider">Designation</th>
                   <th className="px-6 py-4 text-xs font-bold text-neutral-400 uppercase tracking-wider">Department</th>
                   <th className="px-6 py-4 text-xs font-bold text-neutral-400 uppercase tracking-wider">Status</th>
+                  <th className="px-6 py-4 text-xs font-bold text-neutral-400 uppercase tracking-wider">Last Patient</th>
+                  <th className="px-6 py-4 text-xs font-bold text-neutral-400 uppercase tracking-wider">Patient Address</th>
                   <th className="px-6 py-4 text-xs font-bold text-neutral-400 uppercase tracking-wider">Contact</th>
                   <th className="px-6 py-4 text-xs font-bold text-neutral-400 uppercase tracking-wider">Email</th>
                   <th className="px-6 py-4 text-xs font-bold text-neutral-400 uppercase tracking-wider">DOB</th>
@@ -208,30 +210,38 @@ export default function EmployeeManagement() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-neutral-100">
-                {filteredStaff.slice(0, 10).map((staff) => (
-                  <tr 
-                    key={staff.id} 
-                    className="hover:bg-neutral-50/50 transition-colors group cursor-pointer"
-                    onClick={() => setSelectedEmployee(staff)}
-                  >
-                    <td className="px-6 py-4 text-sm font-mono text-neutral-500">{staff.id}</td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold text-xs group-hover:bg-indigo-600 group-hover:text-white transition-all">
-                          {staff.name.split(" ").map(n => n[0]).join("")}
+                {filteredStaff.slice(0, 10).map((staff) => {
+                  const lastAssignment = INITIAL_ASSIGNMENTS
+                    .filter(a => a.employeeId === staff.id)
+                    .sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime())[0];
+                  const lastPatient = lastAssignment ? INITIAL_PATIENTS.find(p => p.id === lastAssignment.patientId) : null;
+
+                  return (
+                    <tr 
+                      key={staff.id} 
+                      className="hover:bg-neutral-50/50 transition-colors group cursor-pointer"
+                      onClick={() => setSelectedEmployee(staff)}
+                    >
+                      <td className="px-6 py-4 text-sm font-mono text-neutral-500">{staff.id}</td>
+                      <td className="px-6 py-4">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold text-xs group-hover:bg-indigo-600 group-hover:text-white transition-all">
+                            {staff.name.split(" ").map(n => n[0]).join("")}
+                          </div>
+                          <p className="text-sm font-bold text-neutral-900">{staff.name}</p>
                         </div>
-                        <p className="text-sm font-bold text-neutral-900">{staff.name}</p>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 text-sm text-neutral-500">{staff.fatherHusbandName || "N/A"}</td>
-                    <td className="px-6 py-4 text-sm text-neutral-700 font-medium">{staff.designation}</td>
-                    <td className="px-6 py-4 text-sm text-neutral-500">{staff.department || "N/A"}</td>
-                    <td className="px-6 py-4">
-                      <span className={`px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${staff.status === 'active' ? "bg-emerald-50 text-emerald-600" : "bg-neutral-100 text-neutral-500"}`}>
-                        {staff.status}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-sm text-neutral-500 font-mono">
+                      </td>
+                      <td className="px-6 py-4 text-sm text-neutral-500">{staff.fatherHusbandName || "N/A"}</td>
+                      <td className="px-6 py-4 text-sm text-neutral-700 font-medium">{staff.designation}</td>
+                      <td className="px-6 py-4 text-sm text-neutral-500">{staff.department || "N/A"}</td>
+                      <td className="px-6 py-4">
+                        <span className={`px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${staff.status === 'active' ? "bg-emerald-50 text-emerald-600" : "bg-neutral-100 text-neutral-500"}`}>
+                          {staff.status}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 text-sm text-neutral-500">{lastPatient?.name || "None"}</td>
+                      <td className="px-6 py-4 text-sm text-neutral-500">{lastPatient?.address || "N/A"}</td>
+                      <td className="px-6 py-4 text-sm text-neutral-500 font-mono">
                       <div className="flex items-center space-x-1">
                         <Phone size={12} className="text-neutral-300" />
                         <span>{staff.contact ? formatPhone(staff.contact) : "N/A"}</span>
@@ -295,8 +305,9 @@ export default function EmployeeManagement() {
                       </div>
                     </td>
                   </tr>
-                ))}
-              </tbody>
+                );
+              })}
+            </tbody>
             </table>
           </div>
           <div className="px-6 py-4 border-t border-neutral-100 bg-neutral-50/50 flex items-center justify-between">
