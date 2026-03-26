@@ -1,0 +1,98 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: users
+    // Fields: uid, email, displayName, role, photoURL
+    //
+    // Collection: applicants
+    // Fields: id, name, email, phone, resumeUrl, status, appliedAt, score, aiFeedback
+    //
+    // Collection: employees
+    // Fields: id, name, email, designation, department, joinDate, status, managerId
+    //
+    // Collection: pto_requests
+    // Fields: id, employeeId, startDate, endDate, type, status, reason, approverId
+    //
+    // Collection: performance_reviews
+    // Fields: id, employeeId, reviewerId, period, status, score, feedback, createdAt
+    //
+    // Collection: onboarding_tasks
+    // Fields: id, employeeId, title, description, dueDate, status, assignedTo
+    //
+    // Collection: compliance_docs
+    // Fields: id, employeeId, type, url, expiryDate, status
+    //
+    // ===============================================================
+
+    // Helper Functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() &&
+        (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin' ||
+         (request.auth.token.email == "thio.developer@gmail.com" && request.auth.token.email_verified == true));
+    }
+
+    function isManager() {
+      return isAuthenticated() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'manager';
+    }
+
+    function hasOnlyAllowedFields(fields) {
+      return request.resource.data.keys().hasOnly(fields);
+    }
+
+    // User profiles
+    match /users/{uid} {
+      allow read: if isAuthenticated();
+      allow create: if isOwner(uid) && hasOnlyAllowedFields(['uid', 'email', 'displayName', 'role', 'photoURL']) && request.resource.data.role == 'employee';
+      allow update: if isAdmin() || (isOwner(uid) && request.resource.data.role == resource.data.role);
+    }
+
+    // Applicants
+    match /applicants/{id} {
+      allow read: if isAdmin() || isManager();
+      allow write: if isAdmin() || isManager();
+    }
+
+    // Employees
+    match /employees/{id} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    // PTO Requests
+    match /pto_requests/{id} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() && request.resource.data.employeeId == request.auth.uid;
+      allow update: if isAdmin() || isManager() || (request.resource.data.employeeId == request.auth.uid && request.resource.data.status == resource.data.status);
+    }
+
+    // Performance Reviews
+    match /performance_reviews/{id} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin() || isManager();
+    }
+
+    // Onboarding Tasks
+    match /onboarding_tasks/{id} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin() || isManager();
+    }
+
+    // Compliance Docs
+    match /compliance_docs/{id} {
+      allow read: if isAdmin() || isManager();
+      allow write: if isAdmin();
+    }
+  }
+}

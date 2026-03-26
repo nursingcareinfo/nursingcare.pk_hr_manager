@@ -1,0 +1,141 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Authenticated user profile",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "manager", "employee"] },
+        "photoURL": { "type": "string" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Applicant": {
+      "title": "Applicant",
+      "description": "Job applicant",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "phone": { "type": "string" },
+        "resumeUrl": { "type": "string" },
+        "status": { "type": "string", "enum": ["applied", "screening", "interview", "offer", "hired", "rejected"] },
+        "appliedAt": { "type": "string", "format": "date-time" },
+        "score": { "type": "integer" },
+        "aiFeedback": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "status", "appliedAt"]
+    },
+    "Employee": {
+      "title": "Employee",
+      "description": "Employee record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "designation": { "type": "string" },
+        "department": { "type": "string" },
+        "joinDate": { "type": "string", "format": "date" },
+        "status": { "type": "string", "enum": ["active", "onboarding", "offboarding", "inactive"] },
+        "managerId": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "designation", "status"]
+    },
+    "PTORequest": {
+      "title": "PTORequest",
+      "description": "Time-off request",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "employeeId": { "type": "string" },
+        "startDate": { "type": "string", "format": "date" },
+        "endDate": { "type": "string", "format": "date" },
+        "type": { "type": "string", "enum": ["vacation", "sick", "personal"] },
+        "status": { "type": "string", "enum": ["pending", "approved", "denied"] },
+        "reason": { "type": "string" },
+        "approverId": { "type": "string" }
+      },
+      "required": ["id", "employeeId", "startDate", "endDate", "type", "status"]
+    },
+    "PerformanceReview": {
+      "title": "PerformanceReview",
+      "description": "Performance review record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "employeeId": { "type": "string" },
+        "reviewerId": { "type": "string" },
+        "period": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "completed"] },
+        "score": { "type": "integer" },
+        "feedback": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "employeeId", "reviewerId", "status", "createdAt"]
+    },
+    "OnboardingTask": {
+      "title": "OnboardingTask",
+      "description": "Onboarding task",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "employeeId": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "dueDate": { "type": "string", "format": "date" },
+        "status": { "type": "string", "enum": ["pending", "completed"] },
+        "assignedTo": { "type": "string", "enum": ["employee", "manager", "it", "hr"] }
+      },
+      "required": ["id", "employeeId", "title", "status", "assignedTo"]
+    },
+    "ComplianceDoc": {
+      "title": "ComplianceDoc",
+      "description": "Compliance document",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "employeeId": { "type": "string" },
+        "type": { "type": "string" },
+        "url": { "type": "string" },
+        "expiryDate": { "type": "string", "format": "date" },
+        "status": { "type": "string", "enum": ["valid", "expired", "missing"] }
+      },
+      "required": ["id", "employeeId", "type", "url", "status"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/applicants/{id}": {
+      "schema": "Applicant",
+      "description": "Job applicants"
+    },
+    "/employees/{id}": {
+      "schema": "Employee",
+      "description": "Employee records"
+    },
+    "/pto_requests/{id}": {
+      "schema": "PTORequest",
+      "description": "Time-off requests"
+    },
+    "/performance_reviews/{id}": {
+      "schema": "PerformanceReview",
+      "description": "Performance reviews"
+    },
+    "/onboarding_tasks/{id}": {
+      "schema": "OnboardingTask",
+      "description": "Onboarding tasks"
+    },
+    "/compliance_docs/{id}": {
+      "schema": "ComplianceDoc",
+      "description": "Compliance documents"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "Nexus HR Automation",
+  "description": "A comprehensive HR Automation System for recruiting, onboarding, employee management, offboarding, and compliance tracking.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}
