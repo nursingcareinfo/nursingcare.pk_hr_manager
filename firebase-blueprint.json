@@ -37,14 +37,56 @@
       "properties": {
         "id": { "type": "string" },
         "name": { "type": "string" },
-        "email": { "type": "string", "format": "email" },
+        "fatherHusbandName": { "type": "string" },
+        "dob": { "type": "string" },
+        "gender": { "type": "string" },
+        "cnic": { "type": "string" },
         "designation": { "type": "string" },
+        "contact1": { "type": "string" },
+        "district": { "type": "string" },
+        "religion": { "type": "string" },
+        "maritalStatus": { "type": "string" },
+        "age": { "type": "string" },
+        "paymentMode": { "type": "string" },
+        "languages": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "onboarding", "offboarding", "inactive"] },
+        "email": { "type": "string", "format": "email" },
         "department": { "type": "string" },
         "joinDate": { "type": "string", "format": "date" },
-        "status": { "type": "string", "enum": ["active", "onboarding", "offboarding", "inactive"] },
         "managerId": { "type": "string" }
       },
-      "required": ["id", "name", "email", "designation", "status"]
+      "required": ["id", "name", "designation", "status", "contact1", "district"]
+    },
+    "Patient": {
+      "title": "Patient",
+      "description": "Patient record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "contact": { "type": "string" },
+        "address": { "type": "string" },
+        "condition": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "discharged", "pending"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "contact", "address", "status", "createdAt"]
+    },
+    "Assignment": {
+      "title": "Assignment",
+      "description": "Staff assignment to patient",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "employeeId": { "type": "string" },
+        "patientId": { "type": "string" },
+        "startDate": { "type": "string", "format": "date" },
+        "endDate": { "type": "string", "format": "date" },
+        "shift": { "type": "string", "enum": ["day", "night", "24h"] },
+        "status": { "type": "string", "enum": ["active", "completed", "cancelled"] },
+        "notes": { "type": "string" }
+      },
+      "required": ["id", "employeeId", "patientId", "startDate", "shift", "status"]
     },
     "PTORequest": {
       "title": "PTORequest",
@@ -136,6 +178,14 @@
     "/compliance_docs/{id}": {
       "schema": "ComplianceDoc",
       "description": "Compliance documents"
+    },
+    "/patients/{id}": {
+      "schema": "Patient",
+      "description": "Patient records"
+    },
+    "/assignments/{id}": {
+      "schema": "Assignment",
+      "description": "Staff assignments"
     }
   }
 }

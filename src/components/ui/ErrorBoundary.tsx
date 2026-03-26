@@ -1,4 +1,4 @@
-import React, { Component, ErrorInfo, ReactNode } from "react";
+import { Component, ErrorInfo, ReactNode } from "react";
 import { AlertTriangle, RefreshCw } from "lucide-react";
 
 interface Props {
@@ -10,8 +10,8 @@ interface State {
   error: Error | null;
 }
 
-class ErrorBoundary extends React.Component<Props, State> {
-  public state: State = {
+class ErrorBoundary extends Component<any, any> {
+  public state: any = {
     hasError: false,
     error: null
   };
@@ -25,10 +25,8 @@ class ErrorBoundary extends React.Component<Props, State> {
   }
 
   public render() {
-    const { hasError, error } = this.state;
-    const { children } = this.props;
-
-    if (hasError) {
+    if (this.state.hasError) {
+      const { error } = this.state;
       let errorMessage = "An unexpected error occurred.";
       try {
         const parsed = JSON.parse(error?.message || "");
@@ -40,12 +38,12 @@ class ErrorBoundary extends React.Component<Props, State> {
       }
 
       return (
-        <div className="min-h-screen bg-neutral-50 flex items-center justify-center p-6">
+        <div className="min-h-screen bg-neutral-50 flex items-center justify-center p-6 text-neutral-900">
           <div className="bg-white p-8 rounded-3xl border border-neutral-200 shadow-xl max-w-md w-full text-center">
             <div className="w-16 h-16 bg-rose-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <AlertTriangle size={32} className="text-rose-600" />
             </div>
-            <h2 className="text-2xl font-bold text-neutral-900 mb-2">Something went wrong</h2>
+            <h2 className="text-2xl font-bold mb-2">Something went wrong</h2>
             <p className="text-neutral-500 mb-8 leading-relaxed">
               {errorMessage}
             </p>
@@ -61,7 +59,7 @@ class ErrorBoundary extends React.Component<Props, State> {
       );
     }
 
-    return children;
+    return (this as any).props.children;
   }
 }
 

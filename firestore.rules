@@ -94,5 +94,17 @@ service cloud.firestore {
       allow read: if isAdmin() || isManager();
       allow write: if isAdmin();
     }
+
+    // Patients
+    match /patients/{id} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin() || isManager();
+    }
+
+    // Assignments
+    match /assignments/{id} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin() || isManager();
+    }
   }
 }

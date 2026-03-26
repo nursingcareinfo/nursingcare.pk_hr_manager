@@ -9,7 +9,8 @@ import {
   ShieldCheck, 
   LayoutDashboard,
   Menu,
-  X
+  X,
+  Heart
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { clsx, type ClassValue } from "clsx";
@@ -40,6 +41,7 @@ export default function Layout({ children }: LayoutProps) {
     { name: "Recruiting", path: "/recruiting", icon: UserPlus },
     { name: "Onboarding", path: "/onboarding", icon: ClipboardCheck },
     { name: "Employees", path: "/employees", icon: Users },
+    { name: "Patients", path: "/patients", icon: Heart },
     { name: "Compliance", path: "/compliance", icon: ShieldCheck },
     { name: "Offboarding", path: "/offboarding", icon: LogOut },
   ];

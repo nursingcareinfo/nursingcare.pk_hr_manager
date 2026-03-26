@@ -10,7 +10,7 @@ import {
 
 export default function Dashboard() {
   const stats = [
-    { name: "Total Employees", value: "286", icon: Users, color: "text-blue-600", bg: "bg-blue-50" },
+    { name: "Total Employees", value: "398", icon: Users, color: "text-blue-600", bg: "bg-blue-50" },
     { name: "Open Positions", value: "12", icon: UserPlus, color: "text-indigo-600", bg: "bg-indigo-50" },
     { name: "Onboarding", value: "8", icon: ClipboardCheck, color: "text-emerald-600", bg: "bg-emerald-50" },
     { name: "Compliance Alerts", value: "3", icon: AlertCircle, color: "text-rose-600", bg: "bg-rose-50" },

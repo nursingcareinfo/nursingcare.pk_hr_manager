@@ -7,6 +7,7 @@ import Dashboard from "./components/Dashboard";
 import Recruiting from "./components/Recruiting";
 import Onboarding from "./components/Onboarding";
 import EmployeeManagement from "./components/EmployeeManagement";
+import PatientManagement from "./components/PatientManagement";
 import Offboarding from "./components/Offboarding";
 import Compliance from "./components/Compliance";
 import Login from "./components/Login";
@@ -54,6 +55,7 @@ export default function App() {
           <Route path="/recruiting" element={<Recruiting />} />
           <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/employees" element={<EmployeeManagement />} />
+          <Route path="/patients" element={<PatientManagement />} />
           <Route path="/offboarding" element={<Offboarding />} />
           <Route path="/compliance" element={<Compliance />} />
           <Route path="*" element={<Navigate to="/" />} />
